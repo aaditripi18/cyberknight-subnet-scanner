@@ -1,204 +1,230 @@
-\# CyberKnight CIDR Subnet Scanner
+# 🛡️ CyberKnight CIDR Subnet Scanner
 
+## 📌 Overview
 
+This project is a **Python-based network scanning tool** that accepts a CIDR subnet as input, identifies live hosts, performs port scanning, and generates structured outputs in both **JSON** and **Markdown** formats.
 
-\## 📌 Description
+The tool leverages **Nmap** for accurate network discovery and is designed to be simple, efficient, and easy to deploy using Docker.
 
+---
 
+## 🚀 Features
 
-This project is a Python-based network scanner that takes a CIDR subnet as input, identifies live hosts, performs port scanning, and generates outputs in JSON and Markdown formats.
+* 🔍 **CIDR Subnet Scanning**
+  Generate all IP addresses within a given subnet range.
 
+* 🌐 **Live Host Detection**
+  Identify active hosts using Nmap ping scan.
 
+* 🔓 **Port Scanning**
+  Scan common ports on all live hosts.
 
-\---
+* 📄 **JSON Output**
+  Machine-readable output of IPs and open ports.
 
+* 📝 **Markdown Report**
+  Clean, human-readable report for analysis.
 
+* 🐳 **Docker Support**
+  Run the entire application in an isolated container.
 
-\## 🚀 Features
+---
 
+## 🛠️ Tech Stack
 
+* **Language:** Python
+* **Libraries:**
 
-\* CIDR subnet scanning
+  * python-nmap
+  * netaddr
+  * tqdm
+* **Tool:** Nmap
+* **Containerization:** Docker
 
-\* Live host detection using Nmap
+---
 
-\* Port scanning of active hosts
+## 📂 Project Structure
 
-\* JSON output for machine-readable data
+```
+cyberknight-subnet-scanner/
+│
+├── scanner.py        # Main application script
+├── requirements.txt  # Python dependencies
+├── Dockerfile        # Docker configuration
+├── README.md         # Documentation
+├── output.json       # Generated JSON output
+└── report.md         # Generated Markdown report
+```
 
-\* Markdown report for human-readable analysis
+---
 
+## ⚙️ Installation
 
-
-\---
-
-
-
-\## 🛠️ Technologies Used
-
-
-
-\* Python
-
-\* Nmap
-
-\* python-nmap
-
-\* netaddr
-
-
-
-\---
-
-
-
-\## 📦 Installation
-
-
-
-\### 1. Clone the repository
-
-
+### 🔹 1. Clone the Repository
 
 ```bash
-
 git clone https://github.com/aaditripi18/cyberknight-subnet-scanner.git
-
 cd cyberknight-subnet-scanner
-
 ```
 
+---
 
-
-\### 2. Install dependencies
-
-
+### 🔹 2. Install Python Dependencies
 
 ```bash
-
 pip install -r requirements.txt
-
 ```
 
+---
 
+### 🔹 3. Install Nmap
 
-\### 3. Install Nmap
+Download and install from:
+👉 https://nmap.org/download.html
 
+⚠️ Ensure Nmap is added to your system PATH.
 
+---
 
-Download and install from: https://nmap.org/download.html
-
-
-
-\---
-
-
-
-\## ▶️ Usage
-
-
+## ▶️ Usage
 
 Run the script:
 
-
-
 ```bash
-
 python scanner.py
-
 ```
 
-
-
-Enter a CIDR subnet:
-
-
+Enter a CIDR subnet when prompted:
 
 ```bash
-
 192.168.1.0/24
-
 ```
 
+---
 
+## 🧪 Example Run
 
-\---
+### 🔹 Input
 
+```
+127.0.0.1/32
+```
 
+### 🔹 Output (Terminal)
 
-\## 📄 Output
+```
+Scanning for live hosts...
 
+[+] 127.0.0.1 is LIVE
 
+Scanning ports...
 
-\### JSON Output (`output.json`)
+127.0.0.1 -> Open Ports: [445]
+```
 
+---
 
+## 📄 Output Files
+
+### 🔹 JSON Output (`output.json`)
 
 ```json
-
 {
-
-&#x20; "127.0.0.1": \[445]
-
+    "127.0.0.1": [445]
 }
-
 ```
 
+---
 
+### 🔹 Markdown Report (`report.md`)
 
-\### Markdown Report (`report.md`)
+Includes:
 
+* Scan time
+* Subnet scanned
+* List of live IPs
+* Open ports per IP
 
+---
 
-Contains:
+## ⚙️ Code Structure
 
+The main script `scanner.py` is organized into modular functions:
 
+* **`generate_ips(cidr)`**
+  Converts CIDR notation into a list of IP addresses.
 
-\* Scan time
+* **`find_live_hosts(ips)`**
+  Uses Nmap ping scan (`-sn`) to identify active hosts.
 
-\* Subnet
+* **`scan_ports(live_ips)`**
+  Performs port scanning on common ports.
 
-\* Live IPs
+* **`save_json(results)`**
+  Stores scan results in JSON format.
 
-\* Open ports
+* **`generate_markdown(results, subnet)`**
+  Creates a structured Markdown report.
 
+---
 
+## 🐳 Docker Usage
 
-\---
+### 🔹 Build Docker Image
 
+```bash
+docker build -t subnet-scanner .
+```
 
+---
 
-\## 🎥 Demonstration
+### 🔹 Run Container
 
+```bash
+docker run -it subnet-scanner
+```
 
+Enter CIDR input when prompted.
 
-A video demonstration of the script execution is included as part of the submission.
+⚠️ Note: Port results inside Docker may differ due to container networking.
 
+---
 
+## 📌 Notes
 
-\---
+* Requires Nmap installed and configured
+* Uses common ports for faster scanning
+* Output files are generated automatically after execution
+* Docker ensures consistent environment setup
 
+---
 
+## 🎥 Demonstration
 
-\## 📌 Notes
+A video demonstration showcasing:
 
+* Script execution
+* Output generation
+* Docker usage
 
+is included as part of the submission.
 
-\* Requires Nmap to be installed and available in system PATH
+---
 
-\* Port scan uses common ports for faster execution
+## 👨‍💻 Author
 
+**Aaditya Tripathi**
 
+---
 
-\---
+## ⭐ Conclusion
 
+This project demonstrates practical knowledge of:
 
+* Network scanning
+* Python scripting
+* Tool integration (Nmap)
+* Output formatting
+* Containerization with Docker
 
-\## 👨‍💻 Author
-
-
-
-Aaditya Tripathi
-
-
-
+It is designed to be simple, extensible, and production-ready.
